@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KROMA · Do Som ao Circuito</title>
+  <!-- Google Fonts para um toque moderno e arredondado -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #343e5c;
+      color: #e2f4ac;
+      font-family: 'Nunito', sans-serif;
+      line-height: 1.6;
+      padding: 0 20px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===== CONTAINER ===== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    /* ===== CORES ===== */
+    :root {
+      --bg: #343e5c;
+      --text-light: #e2f4ac;
+      --green-mid: #68d47a;
+      --cyan: #4fbce0;
+      --border-dark: #1e2126;
+      --card-bg: #2a3250;
+    }
+
+    /* ===== HEADER / NAV ===== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 20px 0;
+      border-bottom: 4px solid var(--border-dark);
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.4rem;
+      color: var(--text-light);
+      text-shadow: 4px 4px 0 var(--border-dark);
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: var(--cyan);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 6px 0;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s, color 0.3s;
+      color: #c8d9e6;
+    }
+
+    nav a:hover {
+      border-bottom-color: var(--green-mid);
+      color: var(--text-light);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      padding: 40px 0 60px;
+    }
+
+    .hero-text {
+      flex: 1 1 400px;
+    }
+
+    .hero-text h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 3.2rem;
+      line-height: 1.2;
+      color: var(--text-light);
+      text-shadow: 4px 4px 0 var(--border-dark);
+      margin-bottom: 16px;
+    }
+
+    .hero-text h1 span {
+      color: var(--cyan);
+    }
+
+    .hero-text p {
+      font-size: 1.3rem;
+      color: #d0e0f0;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--green-mid);
+      color: var(--border-dark);
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 14px 36px;
+      border-radius: 60px;
+      border: 4px solid var(--border-dark);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      cursor: pointer;
+      box-shadow: 0 6px 0 var(--border-dark);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 0 var(--border-dark);
+      background-color: #7ae08a;
+    }
+
+    .btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 3px 0 var(--border-dark);
+    }
+
+    .hero-mascote {
+      flex: 1 1 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mascote-placeholder {
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle at 30% 30%, var(--cyan), var(--green-mid));
+      border-radius: 50% 50% 50% 0;
+      border: 8px solid var(--border-dark);
+      box-shadow: 12px 12px 0 var(--border-dark);
+      transform: rotate(-8deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.6rem;
+      color: var(--border-dark);
+      text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.3);
+      transition: transform 0.4s ease;
+    }
+
+    .mascote-placeholder:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+
+    /* ===== SEÇÕES ===== */
+    section {
+      margin: 70px 0;
+    }
+
+    .section-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.6rem;
+      color: var(--text-light);
+      text-shadow: 3px 3px 0 var(--border-dark);
+      margin-bottom: 30px;
+      border-left: 8px solid var(--cyan);
+      padding-left: 20px;
+    }
+
+    /* ===== CARDS (Portfólio / Loja) ===== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 30px;
+      border: 4px solid var(--border-dark);
+      padding: 24px 20px;
+      box-shadow: 8px 8px 0 var(--border-dark);
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 12px 12px 0 var(--border-dark);
+    }
+
+    .card-icon {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #d0e0f0;
+      font-size: 0.98rem;
+      flex: 1;
+    }
+
+    .card .preco {
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--green-mid);
+      margin: 12px 0 8px;
+    }
+
+    .card .btn-small {
+      align-self: flex-start;
+      background-color: var(--cyan);
+      color: var(--border-dark);
+      font-weight: 700;
+      padding: 8px 22px;
+      border-radius: 40px;
+      border: 3px solid var(--border-dark);
+      transition: background 0.2s, transform 0.2s;
+      cursor: pointer;
+      margin-top: 12px;
+      box-shadow: 0 4px 0 var(--border-dark);
+    }
+
+    .card .btn-small:hover {
+      background-color: #7ad0f0;
+      transform: scale(1.03);
+    }
+
+    /* ===== SOBRE ===== */
+    .sobre-texto {
+      background: var(--card-bg);
+      border-radius: 30px;
+      border: 4px solid var(--border-dark);
+      padding: 30px 35px;
+      box-shadow: 8px 8px 0 var(--border-dark);
+      font-size: 1.1rem;
+      color: #ddeeff;
+      max-width: 800px;
+    }
+
+    .sobre-texto strong {
+      color: var(--cyan);
+    }
+
+    .sobre-texto .destaque {
+      color: var(--green-mid);
+      font-weight: 700;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 4px solid var(--border-dark);
+      padding: 30px 0 20px;
+      margin-top: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 20px;
+      font-size: 1.8rem;
+    }
+
+    .social-links a {
+      transition: color 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .social-links a:hover {
+      color: var(--cyan);
+      transform: scale(1.2);
+    }
+
+    footer p {
+      font-size: 0.95rem;
+      color: #b0c8dd;
+    }
+
+    /* ===== RESPONSIVIDADE ===== */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      nav ul {
+        justify-content: center;
+        gap: 18px;
+      }
+      .hero-text h1 {
+        font-size: 2.6rem;
+      }
+      .mascote-placeholder {
+        width: 200px;
+        height: 200px;
+        font-size: 2rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0 12px;
+      }
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+      .btn {
+        padding: 12px 28px;
+        font-size: 1rem;
+      }
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+
+    /* ===== ANIMAÇÕES ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ===== HEADER ===== -->
+    <header>
+      <div class="logo">KROMA<span>.</span></div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#portfolio">Portfólio</a></li>
+          <li><a href="#loja">Loja</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section id="home" class="hero fade-in">
+      <div class="hero-text">
+        <h1>KROMA<br><span>Do Som ao Circuito</span></h1>
+        <p>Engenharia de áudio, pedais handmade e sample packs com alma de camaleão.</p>
+        <a href="#portfolio" class="btn">Ver Projetos</a>
+      </div>
+      <div class="hero-mascote">
+        <div class="mascote-placeholder" title="Mascote Camaleão (substitua pela sua arte)">
+          🦎
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PORTFÓLIO ===== -->
+    <section id="portfolio" class="fade-in">
+      <h2 class="section-title">🎧 Portfólio</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🎛️</div>
+          <h3>Álbum “Frequências”</h3>
+          <p>Mixagem e masterização de 12 faixas instrumentais com timbres orgânicos e digitais.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎸</div>
+          <h3>Live Session "Croma"</h3>
+          <p>Gravação e produção ao vivo de uma banda de rock progressivo, com captação imersiva.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔊</div>
+          <h3>Design Sonoro para Games</h3>
+          <p>Criação de ambientes e efeitos para um jogo indie de aventura.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎚️</div>
+          <h3>Remix “Eco”</h3>
+          <p>Remix de faixa eletrônica com tratamento dinâmico e espacial.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LOJA ===== -->
+    <section id="loja" class="fade-in">
+      <h2 class="section-title">🛒 Loja</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🎛️</div>
+          <h3>Overdrive “Camaleão”</h3>
+          <p>Pedal handmade com dois estágios de ganho e equalização ativa.</p>
+          <div class="preco">Sob consulta</div>
+          <button class="btn-small">Saber mais</button>
+        </div>
+        <div class="card">
+          <div class="card-icon">📦</div>
+          <h3>Sample Pack “Ritmos”</h3>
+          <p>120 loops e one-shots de percussão analógica e sintetizada.</p>
+          <div class="preco">R$ 0,00</div>
+          <button class="btn-small">Comprar</button>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎚️</div>
+          <h3>Fuzz “Verde”</h3>
+          <p>Fuzz vintage com controle de sustentação e timbre agressivo.</p>
+          <div class="preco">Sob consulta</div>
+          <button class="btn-small">Saber mais</button>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎹</div>
+          <h3>Sample Pack “Ambientes”</h3>
+          <p>Pads, texturas e drones para música cinematográfica.</p>
+          <div class="preco">R$ 0,00</div>
+          <button class="btn-small">Comprar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SOBRE ===== -->
+    <section id="sobre" class="fade-in">
+      <h2 class="section-title">🧠 Sobre</h2>
+      <div class="sobre-texto">
+        <p>
+          <strong>KROMA</strong> nasceu da paixão por <span class="destaque">som</span> e 
+          <span class="destaque">circuitos</span>. Sou engenheiro de áudio há mais de 10 anos, 
+          atuando em estúdios, gravações ao vivo e desenvolvimento de equipamentos 
+          analógicos. Cada pedal e sample pack é desenhado com rigor técnico e 
+          sensibilidade artística.
+        </p>
+        <p style="margin-top: 16px;">
+          O <strong>camaleão</strong> é nosso símbolo: representa a <span class="destaque">adaptação</span> 
+          versátil que o som exige — seja no estúdio, no palco ou na sua mesa. 
+          Cada projeto é único, como as cores desse réptil.
+        </p>
+        <p style="margin-top: 16px; font-style: italic; color: var(--cyan);">
+          “Do silêncio ao ruído, do circuito à emoção.”
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== CONTATO (âncora) ===== -->
+    <section id="contato" class="fade-in" style="margin-bottom: 20px;">
+      <h2 class="section-title">📬 Contato</h2>
+      <div style="background: var(--card-bg); border-radius: 30px; border: 4px solid var(--border-dark); padding: 24px 30px; box-shadow: 8px 8px 0 var(--border-dark); max-width: 600px;">
+        <p style="font-size: 1.1rem; color: #ddeeff;">
+          📧 <strong>kroma@audio.com</strong><br>
+          📱 +55 (11) 9 9999-9999<br>
+          <span style="color: var(--green-mid);">▶️</span> Redes sociais abaixo
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+      <div class="social-links">
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="YouTube">▶️</a>
+        <a href="#" aria-label="SoundCloud">🎵</a>
+        <a href="#" aria-label="GitHub">🐙</a>
+      </div>
+      <p>&copy; 2026 KROMA · Do Som ao Circuito</p>
+    </footer>
+
+  </div>
+
+  <!-- ===== SCRIPT ===== -->
+  <script>
+    // Animação fade-in ao rolar a página
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.15,
+    });
+
+    fadeElements.forEach(el => observer.observe(el));
+
+    // Navegação suave para os links (já temos scroll-behavior: smooth)
+    // Pequeno ajuste para o botão "Ver Projetos" levar para a seção certa
+    document.querySelector('.btn[href="#portfolio"]')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+
+  <!-- ===== INSTRUÇÕES DE PUBLICAÇÃO (comentário) ===== -->
+  <!--
+    ************************************************************
+    INSTRUÇÕES PARA PUBLICAR NO GITHUB PAGES (100% GRATUITO)
+    ************************************************************
+
+    1. Crie um repositório público no GitHub com o nome:
+        usuario.github.io   (ex: joaosilva.github.io)
+       OU crie um repositório comum (ex: kroma-site).
+
+    2. Faça upload deste arquivo (index.html) para a raiz do repositório.
+       Se preferir, pode separar em style.css e script.js, mas este
+       arquivo único já contém tudo.
+
+    3. Acesse o repositório > Settings > Pages.
+       - Em "Branch", selecione "main" (ou "master") e a pasta "/ (root)".
+       - Clique em "Save".
+
+    4. Aguarde alguns minutos. Seu site estará disponível em:
+        https://seu-usuario.github.io   (se for user site)
+       ou
+        https://seu-usuario.github.io/nome-do-repo
+
+    5. DOMÍNIO PERSONALIZADO (opcional, mas possível):
+       - Compre um domínio (ex: kromaaudio.com).
+       - No GitHub Pages, em "Custom domain", insira seu domínio.
+       - No serviço de DNS do seu domínio, crie um registro CNAME apontando
+         para seu endereço GitHub Pages (ex: seu-usuario.github.io).
+       - Também crie um arquivo chamado "CNAME" na raiz do repositório
+         contendo apenas o domínio (ex: kromaaudio.com).
+
+    6. Pronto! Seu site KROMA estará no ar, com todas as seções,
+       animações e identidade visual.
+
+    ************************************************************
+  -->
+</body>
+</html>
